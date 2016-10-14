@@ -33,6 +33,16 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-//def gitSha(){
-//    return 'git rev-parse --short HEAD'.execute().text.trim()
-//}
+tinkerPatch {
+    buildConfig {
+        tinkerId = getTinkerIdValue()
+    }
+}
+
+def getTinkerIdValue() {
+    return hasProperty("TINKER_ID") ? TINKER_ID : gitSha()
+}
+
+def gitSha(){
+    return 'git rev-parse --short HEAD'.execute().text.trim()
+}
